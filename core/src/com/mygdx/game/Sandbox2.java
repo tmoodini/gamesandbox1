@@ -51,6 +51,7 @@ public class Sandbox2 extends ApplicationAdapter {
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("my app", "Released");
                 b1.setText("B1");
+                ///
                 
         }
     });
