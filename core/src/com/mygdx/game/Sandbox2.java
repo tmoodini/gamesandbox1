@@ -31,30 +31,14 @@ public class Sandbox2 extends ApplicationAdapter {
 		b1 = new TextButton("B1",skin);
 		 stage = new Stage(new ScreenViewport());
 		b1.setSize(100, 100);
-        b1.setOrigin(0, 0);
+        //b1.setOrigin(-50, -50);
+        b1.setPosition(-50, 0);
         b1.setX(stage.getViewport().getScreenWidth()/2);
         b1.setY(stage.getViewport().getScreenHeight()/2);
         
-        
-        
-        b1.addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
-                b1.setText("Pressed");
-                batch.begin();
-                batch.draw(img,0,0);
-                batch.end();
-                
-                return true;
-        }
+      b1.addListener(new GameButtonListener(batch,img));
        
-        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
-                b1.setText("B1");
-                ///
-                
-        }
-    });
+
        
         stage.act();
 		 stage.addActor(b1);
