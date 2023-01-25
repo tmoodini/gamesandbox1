@@ -19,14 +19,15 @@ public class Sandbox2 extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Skin skin;
-	TextButton b1;
+	GameButton b1;
 	Stage stage;
 	Viewport viewport;
+	String currentTurn;
 	
 	@Override
 	public void create () {
 		
-		
+		currentTurn ="X";
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		
@@ -34,7 +35,7 @@ public class Sandbox2 extends ApplicationAdapter {
 		
 		
 		viewport = new ScreenViewport();
-		b1 = new TextButton("B1",skin);
+		b1 = new GameButton("",skin);
 		 stage = new Stage(viewport);
 		 //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		b1.setSize(100, 100);
@@ -43,7 +44,7 @@ public class Sandbox2 extends ApplicationAdapter {
         b1.setX(stage.getViewport().getScreenWidth()/2);
         b1.setY(stage.getViewport().getScreenHeight()/2);
         
-      b1.addListener(new GameButtonListener(batch,img));
+      b1.addListener(new GameButtonListener(batch,img, b1, this));
        
 
        
@@ -81,6 +82,11 @@ public class Sandbox2 extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+	}
+	
+	public String getCurrentTurn() {
+		
+		return this.currentTurn;
 	}
 	
 	
