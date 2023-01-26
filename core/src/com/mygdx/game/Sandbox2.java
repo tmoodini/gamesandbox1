@@ -20,12 +20,15 @@ public class Sandbox2 extends ApplicationAdapter {
 	Texture img;
 	Skin skin;
 	GameButton b1;
+	GameButton b2;
 	Stage stage;
 	Viewport viewport;
 	String currentTurn;
+	//GameButton[] buttons;
 	
 	@Override
 	public void create () {
+		
 		
 		currentTurn ="X";
 		batch = new SpriteBatch();
@@ -36,11 +39,13 @@ public class Sandbox2 extends ApplicationAdapter {
 		
 		viewport = new ScreenViewport();
 		b1 = new GameButton("",skin);
+		b2 = new GameButton("",skin);
+		GameButton[] buttons = {new GameButton("",skin),new GameButton("",skin),new GameButton("",skin)};
 		 stage = new Stage(viewport);
 		 //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		b1.setSize(100, 100);
         //b1.setOrigin(-50, -50);
-        b1.setPosition(-50, 0);
+        //b1.setPosition(-50, 0);
         b1.setX(stage.getViewport().getScreenWidth()/2);
         b1.setY(stage.getViewport().getScreenHeight()/2);
         
