@@ -24,11 +24,13 @@ public class Sandbox2 extends ApplicationAdapter {
 	Stage stage;
 	Viewport viewport;
 	String currentTurn;
-	GameButton[] buttons;
+	GameButton[][] buttons;
+	GameBoard gb;
 	
 	@Override
 	public void create () {
 		
+		GameBoard gb = new GameBoard();
 		
 		currentTurn ="X";
 		batch = new SpriteBatch();
@@ -39,23 +41,25 @@ public class Sandbox2 extends ApplicationAdapter {
 		
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport);
-		buttons = new GameButton[9];
+		buttons = new GameButton[3][3];
 		int x = 0;
 		int y = 0;
-		for(int i =0; i<9; i++) {
+		for(int i =0; i<3; i++) {
 			
-			buttons[i] = new GameButton("",skin);
-			buttons[i].setSize(100, 100);
-			buttons[i].setX(stage.getViewport().getScreenWidth()/2+x);
-		    buttons[i].setY(stage.getViewport().getScreenHeight()/2+y);
-		    buttons[i].addListener(new GameButtonListener(batch,img, buttons[i], this));
-		    
-		    
-		    	x+=100;
-		    	if(i == 2 || i == 5) {
+			for(int j = 0; j < 3; j++) {
+			buttons[i][j] = new GameButton("",skin);
+			buttons[i][j].setSize(100, 100);
+			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
+		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
+		    buttons[i][j].addListener(new GameButtonListener(batch,img, buttons[i][j], this,gb));
+		    buttons[i][j].setRow(i);
+		    buttons[i][j].setColumn(j);
+		    x+=100;
+			}
+		    	
 		    		x = 0;
 		    		y-=100;
-		    	}
+		    	
 		    
 		    
 		}
@@ -83,8 +87,11 @@ public class Sandbox2 extends ApplicationAdapter {
 **/
        
         stage.act();
-        for(int i =0; i< 9;i++) {
-        	stage.addActor(buttons[i]);
+        for(int i =0; i< 3;i++) {
+        	for(int j=0; j<3;j++)
+        	{
+        	stage.addActor(buttons[i][j]);
+        	}
         }
 		 //stage.addActor(b1);
 		 //stage.addActor(b2);
