@@ -27,19 +27,32 @@ public class GameButtonListener extends InputListener{
 	@Override 
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
         Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
-        TextButton b1 = (TextButton) event.getListenerActor();
-        b1.setText(sb2.getCurrentTurn());		
-        batch.begin();
-        batch.draw(img,0,0);
-        batch.end();
-        this.button.setSelected(true);
+        GameButton b1 = (GameButton) event.getListenerActor();
+        
+        if(!b1.getSelected()) {
+        	
+        	b1.setText(sb2.getCurrentTurn());		
+            batch.begin();
+            batch.draw(img,0,0);
+            batch.end();
+            this.button.setSelected(true);
+            if(sb2.getCurrentTurn() == "X") {
+            	sb2.setCurrentTurn("O");
+            }
+            else {
+            	sb2.setCurrentTurn("X");
+            }
+            b1.setDisabled(true);
+        }
+        
+        
         return true;
 }
 	
 	 public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
        Gdx.app.log("my app", "Released");
        TextButton b1 = (TextButton) event.getListenerActor();
-       b1.setText(sb2.getCurrentTurn());
+       //b1.setText(sb2.getCurrentTurn());
        
        
        
