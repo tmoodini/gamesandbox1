@@ -10,24 +10,6 @@ public class GameButton extends TextButton{
 	private int column;
 	
 	
-	public int getRow() {
-		return row;
-	}
-
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-
-	public int getColumn() {
-		return column;
-	}
-
-
-	public void setColumn(int column) {
-		this.column = column;
-	}
 
 
 	public GameButton(String text, Skin skin) {
@@ -56,8 +38,24 @@ public class GameButton extends TextButton{
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	
-	
-	
+	public int getRow() {
+		return row;
+	}
 
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+
+	public int getColumn() {
+		return column;
+	}
+
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	
 }
