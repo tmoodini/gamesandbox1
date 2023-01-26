@@ -29,7 +29,7 @@ enum State{Blank, X, O, Draw};
             if(board[x][i] != s)
                 break;
             if(i == n-1){
-            	System.out.println("Winner! " + s );
+            	
                 return s;
             }
         }
@@ -39,7 +39,7 @@ enum State{Blank, X, O, Draw};
             if(board[i][y] != s)
                 break;
             if(i == n-1){
-            	System.out.println("Winner! " + s );
+            	
                 return s;
             }
         }
@@ -51,7 +51,7 @@ enum State{Blank, X, O, Draw};
                 if(board[i][i] != s)
                     break;
                 if(i == n-1){
-                	System.out.println("Winner! " + s );
+                	
                     return s;
                 }
             }
