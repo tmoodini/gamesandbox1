@@ -26,65 +26,29 @@ public class Sandbox2 extends ApplicationAdapter {
 	String currentTurn;
 	GameButton[][] buttons;
 	GameBoard gb;
+	TextButton resetButton;
 	
 	@Override
 	public void create () {
 		
 		GameBoard gb = new GameBoard();
 		
+		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
+		resetButton = new GameButton("RESET",skin);
 		currentTurn ="X";
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		
-		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
-		
+		buttons = new GameButton[3][3];
+		resetButton.addListener(new ResetButtonListener(batch, img, gb,this));
 		
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport);
-		buttons = new GameButton[3][3];
-		int x = 0;
-		int y = 0;
-		for(int i =0; i<3; i++) {
-			
-			for(int j = 0; j < 3; j++) {
-			buttons[i][j] = new GameButton("",skin);
-			buttons[i][j].setSize(100, 100);
-			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
-		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
-		    buttons[i][j].addListener(new GameButtonListener(batch,img, buttons[i][j], this,gb));
-		    buttons[i][j].setRow(i);
-		    buttons[i][j].setColumn(j);
-		    x+=100;
-			}
-		    	
-		    		x = 0;
-		    		y-=100;
-		    	
-		    
-		    
-		}
 		
 		
-		/**
-		b1 = new GameButton("",skin);
-		b2 = new GameButton("",skin);
-		 
-		 
-		 //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		b1.setSize(100, 100);
-		b2.setSize(100, 100);
-        //b1.setOrigin(-50, -50);
-        //b1.setPosition(-50, 0);
-        b1.setX(stage.getViewport().getScreenWidth()/2);
-        b1.setY(stage.getViewport().getScreenHeight()/2);
-        
-        b2.setX(stage.getViewport().getScreenWidth()/2);
-        b2.setY(stage.getViewport().getScreenHeight()/2-100);
-        
-      b1.addListener(new GameButtonListener(batch,img, b1, this));
-      b2.addListener(new GameButtonListener(batch,img, b2, this));
-       
-**/
+		this.newGame(gb);
+		System.out.println("BUTTON [0][0] " + buttons[0][0].getColumn());
+	
        
         stage.act();
         for(int i =0; i< 3;i++) {
@@ -93,6 +57,7 @@ public class Sandbox2 extends ApplicationAdapter {
         	stage.addActor(buttons[i][j]);
         	}
         }
+        stage.addActor(resetButton);
 		 //stage.addActor(b1);
 		 //stage.addActor(b2);
 		 //Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -136,6 +101,43 @@ public class Sandbox2 extends ApplicationAdapter {
 	public void setCurrentTurn(String turn) {
 		
 		this.currentTurn = turn;
+	}
+	
+	public void newGame(GameBoard gb) {
+		int x = 0;
+		int y = 0;
+		System.out.println("NEW GAME");
+		for(int i =0; i< 3;i++) {
+        	for(int j=0; j<3;j++)
+        	{
+        		if(buttons[i][j] != null) {
+        	buttons[i][j].remove();
+        		}
+        	}
+        }
+		buttons = null;
+		buttons = new GameButton[3][3];
+		for(int i =0; i<3; i++) {
+			
+			for(int j = 0; j < 3; j++) {
+			buttons[i][j] = new GameButton("",skin);
+			buttons[i][j].setSize(100, 100);
+			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
+		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
+		    buttons[i][j].addListener(new GameButtonListener(batch,img, buttons[i][j], this,gb));
+		    buttons[i][j].setRow(i);
+		    buttons[i][j].setColumn(j);
+		    stage.addActor(buttons[i][j]);
+		    x+=100;
+			}
+		    	
+		    		x = 0;
+		    		y-=100;
+		    	
+		    
+		    
+		}
+		
 	}
 	
 	

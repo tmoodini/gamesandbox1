@@ -24,22 +24,23 @@ enum State{Blank, X, O, Draw};
         
         //check end conditions
         
-        //check col
+        //check row
         for(int i = 0; i < n; i++){
             if(board[x][i] != s)
                 break;
             if(i == n-1){
             	
+            	System.out.println("Winner Row " + s);
                 return s;
             }
         }
         
-        //check row
+        //check column
         for(int i = 0; i < n; i++){
             if(board[i][y] != s)
                 break;
             if(i == n-1){
-            	
+            	System.out.println("Winner Column " + s);
                 return s;
             }
         }
@@ -51,7 +52,7 @@ enum State{Blank, X, O, Draw};
                 if(board[i][i] != s)
                     break;
                 if(i == n-1){
-                	
+                	System.out.println("Winner Diag " + s);
                     return s;
                 }
             }
@@ -63,6 +64,7 @@ enum State{Blank, X, O, Draw};
                 if(board[i][(n-1)-i] != s)
                     break;
                 if(i == n-1){
+                	System.out.println("Winner AntiDiag " + s);
                     return s;
                 }
             }
