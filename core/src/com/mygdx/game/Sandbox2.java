@@ -58,9 +58,7 @@ public class Sandbox2 extends ApplicationAdapter {
         	}
         }
         stage.addActor(resetButton);
-		 //stage.addActor(b1);
-		 //stage.addActor(b2);
-		 //Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+		
 	}
 
 	@Override
@@ -73,12 +71,12 @@ public class Sandbox2 extends ApplicationAdapter {
         
         
        
-		//batch.draw(img, 0, 0);
+		
 		 stage.getViewport().update(stage.getViewport().getScreenWidth(), stage.getViewport().getScreenHeight());
 		    stage.draw();
 		    stage.act();
 		batch.begin();    
-		//b1.draw(batch, 0);
+		
 		batch.end();
 	}
 	
