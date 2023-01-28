@@ -17,7 +17,7 @@ enum State{Blank, X, O, Draw};
     public State move(int x, int y, State s){
     	
     	//System.out.println("Checking move");
-        if(board[x][y] == null){
+        if(board[x][y] == null || board[x][y] == State.Blank){
             board[x][y] = s;
         }
         moveCount++;

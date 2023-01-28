@@ -24,7 +24,7 @@ public class ResetButtonListener extends InputListener{
         //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
         TextButton reset = (TextButton) event.getListenerActor();
         System.out.println("RESET!");
-        sb2.newGame(gb);
+        sb2.newGame();
         batch.begin();
         batch.draw(img,0,0);
         batch.end();

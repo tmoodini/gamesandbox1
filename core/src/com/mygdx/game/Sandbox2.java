@@ -46,7 +46,7 @@ public class Sandbox2 extends ApplicationAdapter {
 		stage = new Stage(viewport);
 		
 		
-		this.newGame(gb);
+		this.newGame();
 		System.out.println("BUTTON [0][0] " + buttons[0][0].getColumn());
 	
        
@@ -101,10 +101,11 @@ public class Sandbox2 extends ApplicationAdapter {
 		this.currentTurn = turn;
 	}
 	
-	public void newGame(GameBoard gb) {
+	public void newGame() {
 		int x = 0;
 		int y = 0;
 		System.out.println("NEW GAME");
+		this.gb = new GameBoard();
 		for(int i =0; i< 3;i++) {
         	for(int j=0; j<3;j++)
         	{
