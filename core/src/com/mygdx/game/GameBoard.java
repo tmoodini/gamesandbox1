@@ -77,8 +77,9 @@ enum State{Blank, X, O, Draw};
         
         return State.Blank;
     }
-	public static void main(String[] args) {
-		
-	}
+	
+    public State currentState(int x, int y) {
+    	return board[x][y];
+    }
 
 }

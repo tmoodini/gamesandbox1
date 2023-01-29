@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.game.Sandbox2;
+import com.mygdx.game.MainGameUI;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Sandbox2");
 		config.setWindowedMode(800, 800);
-		new Lwjgl3Application(new Sandbox2(), config);
+		GameController controller = new GameController();
+		new Lwjgl3Application(controller.getMgui(), config);
 	}
 }

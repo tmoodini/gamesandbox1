@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Sandbox2 extends ApplicationAdapter {
+public class MainGameUI extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Skin skin;
@@ -27,6 +27,15 @@ public class Sandbox2 extends ApplicationAdapter {
 	GameButton[][] buttons;
 	GameBoard gb;
 	TextButton resetButton;
+	
+	private GameController controller;
+	
+	
+	public MainGameUI(GameController controller) {
+		
+		this.controller = controller;
+		
+	}
 	
 	@Override
 	public void create () {
@@ -40,7 +49,7 @@ public class Sandbox2 extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 		
 		buttons = new GameButton[3][3];
-		resetButton.addListener(new ResetButtonListener(batch, img, gb,this));
+		resetButton.addListener(new ResetButtonListener(batch, img,controller));
 		
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport);
@@ -105,7 +114,7 @@ public class Sandbox2 extends ApplicationAdapter {
 		int x = 0;
 		int y = 0;
 		System.out.println("NEW GAME");
-		this.gb = new GameBoard();
+		//this.gb = new GameBoard();
 		for(int i =0; i< 3;i++) {
         	for(int j=0; j<3;j++)
         	{
@@ -123,7 +132,7 @@ public class Sandbox2 extends ApplicationAdapter {
 			buttons[i][j].setSize(100, 100);
 			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
 		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
-		    buttons[i][j].addListener(new GameButtonListener(batch,img, buttons[i][j], this,gb));
+		    buttons[i][j].addListener(new GameButtonListener(batch,img, controller));
 		    buttons[i][j].setRow(i);
 		    buttons[i][j].setColumn(j);
 		    stage.addActor(buttons[i][j]);

@@ -13,15 +13,15 @@ public class GameButtonListener extends InputListener{
 	SpriteBatch batch;
 	Texture img;
 	GameButton button;
-	Sandbox2 sb2;
-	GameBoard gb;
+	MainGameUI sb2;
 	
-	public GameButtonListener(SpriteBatch batch, Texture img, GameButton button, Sandbox2 sb2, GameBoard gb) {
-		this.sb2 = sb2;
+	GameController controller;
+	
+	public GameButtonListener(SpriteBatch batch, Texture img, GameController controller) {
+		this.controller = controller;
 		this.batch = batch;
 		this.img = img;
-		this.button = button;
-		this.gb = gb;
+		
 		
 		
 	}
@@ -32,26 +32,25 @@ public class GameButtonListener extends InputListener{
         GameButton b1 = (GameButton) event.getListenerActor();
         
         if(!b1.getSelected()) {
-        	GameBoard.State gbState = GameBoard.State.Blank;
-        	b1.setText(sb2.getCurrentTurn());		
+        	GameBoard.State currentPlayer = controller.getCurrentPlayer();
+        
+        	GameController.MoveResult moveResult = controller.move(b1.getRow(), b1.getColumn());
+        	System.out.println(moveResult.toString());
+        	if(moveResult != GameController.MoveResult.OCCUPIED ) {
+        		
+        			b1.setText(currentPlayer.toString());		
+        		
+        		
+        	}
+        	
+        	
             batch.begin();
             batch.draw(img,0,0);
             batch.end();
-            if(sb2.getCurrentTurn() == "X") {
-            	gbState = GameBoard.State.X;
-            }else {
-            	gbState = GameBoard.State.O;
-            }
-            gbState = gb.move(this.button.getRow(), this.button.getColumn(), gbState);
-            System.out.println(gbState);
-            this.button.setSelected(true);
-            if(sb2.getCurrentTurn() == "X") {
-            	
-            	sb2.setCurrentTurn("O");
-            }
-            else {
-            	sb2.setCurrentTurn("X");
-            }
+           
+           
+            b1.setSelected(true);
+           
             b1.setDisabled(true);
         }
         
