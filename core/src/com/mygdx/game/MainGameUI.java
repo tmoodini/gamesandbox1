@@ -4,10 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -40,7 +37,7 @@ public class MainGameUI extends ApplicationAdapter {
 	@Override
 	public void create () {
 		
-		GameBoard gb = new GameBoard();
+		
 		
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		resetButton = new GameButton("RESET",skin);
