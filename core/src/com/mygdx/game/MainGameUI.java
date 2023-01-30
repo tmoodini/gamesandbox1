@@ -2,10 +2,13 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -24,7 +27,8 @@ public class MainGameUI extends ApplicationAdapter {
 	GameButton[][] buttons;
 	GameBoard gb;
 	TextButton resetButton;
-	
+	Label winLabel;
+	BitmapFont font;
 	private GameController controller;
 	
 	
@@ -37,8 +41,8 @@ public class MainGameUI extends ApplicationAdapter {
 	@Override
 	public void create () {
 		
-		
-		
+		viewport = new ScreenViewport();
+		stage = new Stage(viewport);
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		resetButton = new GameButton("RESET",skin);
 		currentTurn ="X";
@@ -47,13 +51,14 @@ public class MainGameUI extends ApplicationAdapter {
 		
 		buttons = new GameButton[3][3];
 		resetButton.addListener(new ResetButtonListener(batch, img,controller));
+		this.winLabel = new Label("TEST", skin, "black");
+		winLabel.setY(stage.getViewport().getScreenHeight());
 		
-		viewport = new ScreenViewport();
-		stage = new Stage(viewport);
+		
 		
 		
 		this.newGame();
-		System.out.println("BUTTON [0][0] " + buttons[0][0].getColumn());
+		
 	
        
         stage.act();
@@ -64,6 +69,7 @@ public class MainGameUI extends ApplicationAdapter {
         	}
         }
         stage.addActor(resetButton);
+        stage.addActor(winLabel);
 		
 	}
 
@@ -105,6 +111,10 @@ public class MainGameUI extends ApplicationAdapter {
 	public void setCurrentTurn(String turn) {
 		
 		this.currentTurn = turn;
+	}
+	
+	public void setWinLabelText(String text) {
+		this.winLabel = new Label(text,this.skin);
 	}
 	
 	public void newGame() {
