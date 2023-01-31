@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
 import com.mygdx.game.GameBoard.State;
+import com.mygdx.game.ai.EasyAI;
 import com.mygdx.game.ai.GFG;
+import com.mygdx.game.ai.TicTacAI;
 
 public class GameController {
 	
@@ -9,13 +11,16 @@ public class GameController {
 	private GameBoard board;
 	private GameBoard.State currentPlayer;
 	enum MoveResult{WIN,DRAW,ACCEPTED,OCCUPIED};
-	private GFG aiPlayer; 
+	//private GFG aiPlayer; 
+	private EasyAI easyAI;
+	private TicTacAI aiPlayer;
 	
 	public GameController() {
 		this.mgui = new MainGameUI(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
-		this.aiPlayer = new GFG(GameBoard.State.O);
+		this.aiPlayer = new EasyAI(GameBoard.State.O);
+		
 	}
 	
 	
