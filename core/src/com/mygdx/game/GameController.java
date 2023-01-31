@@ -57,12 +57,15 @@ public class GameController {
 		GameBoard.State aiPlay = currentPlayer;
 		
 		int[] aiMove = aiPlayer.findBestMove(this.board.getBoard());
-		
-		MoveResult mr = this.move(aiMove[0],aiMove[1]);
-		if(mr == mr.ACCEPTED || mr == mr.WIN) {
-			System.out.println("STILL GOING");
-		mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
+		System.out.println(aiMove[0]);
+		if(aiMove[0] >= 0) {
+			MoveResult mr = this.move(aiMove[0],aiMove[1]);
+			if(mr == mr.ACCEPTED || mr == mr.WIN) {
+				System.out.println("STILL GOING");
+			    mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
+			}
 		}
+		
 	}
 	
 	public void newGame() {
