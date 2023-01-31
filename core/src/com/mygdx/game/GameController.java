@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.mygdx.game.GameBoard.State;
+import com.mygdx.game.ai.GFG;
 
 public class GameController {
 	
@@ -8,11 +9,13 @@ public class GameController {
 	private GameBoard board;
 	private GameBoard.State currentPlayer;
 	enum MoveResult{WIN,DRAW,ACCEPTED,OCCUPIED};
+	private GFG aiPlayer; 
 	
 	public GameController() {
 		this.mgui = new MainGameUI(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
+		this.aiPlayer = new GFG(GameBoard.State.O);
 	}
 	
 	
@@ -32,6 +35,7 @@ public class GameController {
 		
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O)
 		{
+			mgui.setWinLabelText("WINNER!");
 			return MoveResult.WIN;
 		}
 		
@@ -40,12 +44,24 @@ public class GameController {
 	}
 	
 	public void flipCurrentPlayer() {
-		System.out.println("FLIPPING");
+		
 		if(this.currentPlayer == GameBoard.State.X ) {
 			this.currentPlayer = GameBoard.State.O;
 		}
 		else if(this.currentPlayer == GameBoard.State.O ) {
 			this.currentPlayer = GameBoard.State.X;
+		}
+	}
+	
+	public void aiMove() {
+		GameBoard.State aiPlay = currentPlayer;
+		
+		int[] aiMove = aiPlayer.findBestMove(this.board.getBoard());
+		
+		MoveResult mr = this.move(aiMove[0],aiMove[1]);
+		if(mr == mr.ACCEPTED || mr == mr.WIN) {
+			System.out.println("STILL GOING");
+		mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
 		}
 	}
 	

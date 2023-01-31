@@ -35,7 +35,7 @@ public class GameButtonListener extends InputListener{
         	GameBoard.State currentPlayer = controller.getCurrentPlayer();
         
         	GameController.MoveResult moveResult = controller.move(b1.getRow(), b1.getColumn());
-        	System.out.println(moveResult.toString());
+        	//System.out.println(moveResult.toString());
         	if(moveResult != GameController.MoveResult.OCCUPIED ) {
         		
         			b1.setText(currentPlayer.toString());		
@@ -43,12 +43,14 @@ public class GameButtonListener extends InputListener{
         		
         	}
         	
+        	GameBoard.State nextPlayer = controller.getCurrentPlayer();
+        	System.out.println("NEXT PLAYER " + controller.getCurrentPlayer().toString());
         	
             batch.begin();
             batch.draw(img,0,0);
             batch.end();
            
-           
+            controller.aiMove();
             b1.setSelected(true);
            
             b1.setDisabled(true);
@@ -62,8 +64,11 @@ public class GameButtonListener extends InputListener{
        //Gdx.app.log("my app", "Released");
        TextButton b1 = (TextButton) event.getListenerActor();
        //b1.setText(sb2.getCurrentTurn());
+	 }
+	 
+	
        
        
        
-}
+
 }

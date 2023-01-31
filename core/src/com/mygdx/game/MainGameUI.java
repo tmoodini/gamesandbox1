@@ -2,7 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MainGameUI extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -30,7 +35,7 @@ public class MainGameUI extends ApplicationAdapter {
 	Label winLabel;
 	BitmapFont font;
 	private GameController controller;
-	
+	private Camera camera;
 	
 	public MainGameUI(GameController controller) {
 		
@@ -41,7 +46,12 @@ public class MainGameUI extends ApplicationAdapter {
 	@Override
 	public void create () {
 		
-		viewport = new ScreenViewport();
+		//camera = new PerspectiveCamera();
+        //viewport = new FitViewport(800, 800);
+		//this.camera = new OrthographicCamera();
+        //this.viewport = new FitViewport(0, 0, camera);
+		viewport = new FitViewport(800, 800);
+		//viewport.update(800,800);
 		stage = new Stage(viewport);
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		resetButton = new GameButton("RESET",skin);
@@ -52,8 +62,9 @@ public class MainGameUI extends ApplicationAdapter {
 		buttons = new GameButton[3][3];
 		resetButton.addListener(new ResetButtonListener(batch, img,controller));
 		this.winLabel = new Label("TEST", skin, "black");
-		winLabel.setY(stage.getViewport().getScreenHeight());
 		
+		
+		winLabel.setY(stage.getViewport().getScreenHeight()-100);
 		
 		
 		
@@ -95,7 +106,10 @@ public class MainGameUI extends ApplicationAdapter {
 	@Override
 	public void resize(int width, int height) {
 		
-		viewport.update(width, height);
+		//viewport.update(width, height);
+		
+	       stage.getViewport().update(width, height, true);
+	        
 	}
 	
 	@Override
@@ -103,6 +117,7 @@ public class MainGameUI extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
+	
 	
 	public String getCurrentTurn() {
 		
@@ -114,14 +129,23 @@ public class MainGameUI extends ApplicationAdapter {
 	}
 	
 	public void setWinLabelText(String text) {
-		this.winLabel = new Label(text,this.skin);
+		
+		this.winLabel.setText(text);
+		//stage.draw();
+		
+		
+	}
+	
+	public void flipButton(int row, int column, GameBoard.State state) {
+		
+		this.buttons[row][column].setText(state.toString()); 
 	}
 	
 	public void newGame() {
-		int x = 0;
-		int y = 0;
-		System.out.println("NEW GAME");
-		//this.gb = new GameBoard();
+		int x = -200;
+		int y = 100;
+		
+		
 		for(int i =0; i< 3;i++) {
         	for(int j=0; j<3;j++)
         	{
@@ -146,7 +170,7 @@ public class MainGameUI extends ApplicationAdapter {
 		    x+=100;
 			}
 		    	
-		    		x = 0;
+		    		x = -200;
 		    		y-=100;
 		    	
 		    

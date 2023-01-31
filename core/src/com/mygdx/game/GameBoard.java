@@ -2,17 +2,30 @@ package com.mygdx.game;
 
 public class GameBoard {
 	
-	
+	int n = 3;
+    State[][] board = new State[n][n];
+    int moveCount;	
 	
 	public GameBoard() {
+		for(int i = 0; i< 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				board[i][j] = State.Blank;
+			}
+		}
 		
 	}
 	
-enum State{Blank, X, O, Draw};
+public State[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(State[][] board) {
+		this.board = board;
+	}
+
+public static enum State{Blank, X, O, Draw};
     
-    int n = 3;
-    State[][] board = new State[n][n];
-    int moveCount;
+    
     
     public State move(int x, int y, State s){
     	

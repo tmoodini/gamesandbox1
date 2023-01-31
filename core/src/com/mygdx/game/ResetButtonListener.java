@@ -24,7 +24,7 @@ public class ResetButtonListener extends InputListener{
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
         //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
         TextButton reset = (TextButton) event.getListenerActor();
-        System.out.println("RESET!");
+        
         controller.newGame();
         batch.begin();
         batch.draw(img,0,0);
