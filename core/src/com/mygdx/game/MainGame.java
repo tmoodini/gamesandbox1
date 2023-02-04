@@ -47,10 +47,10 @@ public class MainGame extends Game {
 	@Override
 	public void create () {
 		
-		//camera = new PerspectiveCamera();
-        //viewport = new FitViewport(800, 800);
-		//this.camera = new OrthographicCamera();
-        //this.viewport = new FitViewport(0, 0, camera);
+		this.setScreen(new MainMenuScreen(this));
+		
+		
+		/**
 		viewport = new FitViewport(800, 800);
 		//viewport.update(800,800);
 		stage = new Stage(viewport);
@@ -82,11 +82,15 @@ public class MainGame extends Game {
         }
         stage.addActor(resetButton);
         stage.addActor(winLabel);
+        
+        */
 		
 	}
 
 	@Override
 	public void render () {
+		super.render();
+		/**
 		ScreenUtils.clear(1, 1, 1, 1);
 		
 	     
@@ -102,6 +106,7 @@ public class MainGame extends Game {
 		batch.begin();    
 		
 		batch.end();
+		**/
 	}
 	
 	@Override
@@ -109,14 +114,14 @@ public class MainGame extends Game {
 		
 		//viewport.update(width, height);
 		
-	       stage.getViewport().update(width, height, true);
+	       //stage.getViewport().update(width, height, true);
 	        
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		//batch.dispose();
+		//img.dispose();
 	}
 	
 	
@@ -131,7 +136,7 @@ public class MainGame extends Game {
 	
 	public void setWinLabelText(String text) {
 		
-		this.winLabel.setText(text);
+		//this.winLabel.setText(text);
 		//stage.draw();
 		
 		
