@@ -13,7 +13,7 @@ public class GameButtonListener extends InputListener{
 	SpriteBatch batch;
 	Texture img;
 	GameButton button;
-	MainGameUI sb2;
+	MainGame sb2;
 	
 	GameController controller;
 	

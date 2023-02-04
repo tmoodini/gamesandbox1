@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class MainGameUI extends ApplicationAdapter {
+public class MainGame extends Game {
 	SpriteBatch batch;
 	Texture img;
 	Skin skin;
@@ -37,7 +38,7 @@ public class MainGameUI extends ApplicationAdapter {
 	private GameController controller;
 	private Camera camera;
 	
-	public MainGameUI(GameController controller) {
+	public MainGame(GameController controller) {
 		
 		this.controller = controller;
 		

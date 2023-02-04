@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class ResetButtonListener extends InputListener{
 	
 	private GameBoard gb;
-	private MainGameUI sb2;
+	private MainGame sb2;
 	private SpriteBatch batch;
 	private Texture img;
 	private GameController controller;

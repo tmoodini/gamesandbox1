@@ -7,7 +7,7 @@ import com.mygdx.game.ai.TicTacAI;
 
 public class GameController {
 	
-	private MainGameUI mgui;
+	private MainGame mgui;
 	private GameBoard board;
 	private GameBoard.State currentPlayer;
 	enum MoveResult{WIN,DRAW,ACCEPTED,OCCUPIED};
@@ -16,7 +16,7 @@ public class GameController {
 	private TicTacAI aiPlayer;
 	
 	public GameController() {
-		this.mgui = new MainGameUI(this);
+		this.mgui = new MainGame(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
 		this.aiPlayer = new EasyAI(GameBoard.State.O);
@@ -81,11 +81,11 @@ public class GameController {
 	}
 	
 
-	public MainGameUI getMgui() {
+	public MainGame getMgui() {
 		return mgui;
 	}
 
-	public void setMgui(MainGameUI mgui) {
+	public void setMgui(MainGame mgui) {
 		this.mgui = mgui;
 	}
 
