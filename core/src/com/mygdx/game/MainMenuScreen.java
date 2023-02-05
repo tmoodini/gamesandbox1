@@ -17,6 +17,7 @@ public class MainMenuScreen implements Screen {
 	private Stage stage;
 	private Label helloLabel;
 	
+	
 	public MainMenuScreen(final MainGame game) {
 		this.game = game;
 		
@@ -27,7 +28,11 @@ public class MainMenuScreen implements Screen {
 	
 		stage = new Stage(new FitViewport(800, 480));
 		
-		stage.addActor(helloLabel);
+		
+		
+		startButton = new GameButton("START",skin);
+		
+		stage.addActor(startButton);
 		
 	}
 
