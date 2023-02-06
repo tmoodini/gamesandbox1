@@ -47,6 +47,7 @@ public class MainMenuScreen implements Screen {
 		
 		stage.addActor(startButton);
 		stage.act();
+		//tried again
 		Gdx.input.setInputProcessor(stage);
 		
 	}
