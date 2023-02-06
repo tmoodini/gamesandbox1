@@ -16,6 +16,7 @@ public class GameController {
 	private EasyAI easyAI;
 	private TicTacAI aiPlayer;
 	private TTTScreen[] screen;
+	private MainMenuScreen mainMenuScreen;
 	
 	public GameController() {
 		
@@ -23,6 +24,7 @@ public class GameController {
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
 		this.aiPlayer = new EasyAI(GameBoard.State.O);
+		
 		
 		
 	}
@@ -71,7 +73,7 @@ public class GameController {
 			MoveResult mr = this.move(aiMove[0],aiMove[1]);
 			if(mr == mr.ACCEPTED || mr == mr.WIN) {
 				System.out.println("STILL GOING");
-			    mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
+			    mgui.flipButton(aiMove[0], aiMove[1], currentPlayer);
 			}
 		}
 		

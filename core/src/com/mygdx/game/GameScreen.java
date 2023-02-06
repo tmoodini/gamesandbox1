@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 	private GameController controller;
 
 	
-	public GameScreen(MainGame game) {
+	public GameScreen(final MainGame game) {
 		
 		this.game = game;
 		
@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 		
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		
-		stage = new Stage(new FitViewport(800, 480));
+		stage = new Stage(new FitViewport(800, 800));
 		buttons = new GameButton[3][3];
 		
 		batch = new SpriteBatch();
@@ -136,5 +136,7 @@ public class GameScreen implements Screen {
 		
 		this.buttons[row][column].setText(state.toString()); 
 	}
+	
+	
 
 }

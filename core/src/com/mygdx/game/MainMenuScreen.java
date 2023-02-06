@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen{
 	
 	private MainGame game;
 	private TextButton startButton;
@@ -23,7 +24,7 @@ public class MainMenuScreen implements Screen {
 	private Label helloLabel;
 	
 	
-	public MainMenuScreen(final MainGame game) {
+	public MainMenuScreen(MainGame game) {
 		this.game = game;
 		
 		
@@ -31,17 +32,21 @@ public class MainMenuScreen implements Screen {
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		this.helloLabel = new Label("TEST", skin, "black");
 	
-		stage = new Stage(new FitViewport(800, 480));
+		stage = new Stage(new FitViewport(800, 800));
 		
 		
 		
 		startButton = new GameButton("START",skin);
 		
-		startButton.addCaptureListener(new ChangeListener() {
-	        @Override
-	        public void changed (ChangeEvent event, Actor actor) {
+		startButton.addListener(new InputListener() {
+	        
+	        @Override 
+	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	            //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+	           TextButton b1 = (TextButton) event.getListenerActor();
 	        	game.changeToGameScreen();
 	            System.out.println("Button Pressed");
+	            return true;
 	        }
 	    });
 		
@@ -62,10 +67,10 @@ public class MainMenuScreen implements Screen {
 	public void render(float delta) {
 		ScreenUtils.clear(1, 1, 1, 1);
 		
-		
+		Gdx.input.setInputProcessor(stage);
 		stage.draw();
 		stage.act();
-		Gdx.input.setInputProcessor(stage);
+		
 		
 	}
 

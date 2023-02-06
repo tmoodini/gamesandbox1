@@ -117,7 +117,25 @@ public class MainGame extends Game {
 	
 	public void flipButton(int row, int column, GameBoard.State state) {
 		
+		if(this.gameScreen == null) {
+			System.out.println("NULL GAME!");
+		}
+		
+		try {
 		this.gameScreen.flipButton(row, column, state);
+		
+		}catch (Exception e) {
+			System.out.println("ERROR" + state.toString());
+			e.printStackTrace();
+		}
+	}
+
+	public GameScreen getGameScreen() {
+		return gameScreen;
+	}
+
+	public void setGameScreen(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 	}
 	
 	
