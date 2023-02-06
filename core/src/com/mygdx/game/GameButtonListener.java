@@ -17,8 +17,8 @@ public class GameButtonListener extends InputListener{
 	
 	GameController controller;
 	
-	public GameButtonListener(SpriteBatch batch, Texture img, GameController controller) {
-		this.controller = controller;
+	public GameButtonListener(SpriteBatch batch, Texture img, MainGame game) {
+		this.controller = game.getController();
 		this.batch = batch;
 		this.img = img;
 		

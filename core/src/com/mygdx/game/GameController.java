@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameBoard.State;
 import com.mygdx.game.ai.EasyAI;
 import com.mygdx.game.ai.GFG;
@@ -14,12 +15,15 @@ public class GameController {
 	//private GFG aiPlayer; 
 	private EasyAI easyAI;
 	private TicTacAI aiPlayer;
+	private TTTScreen[] screen;
 	
 	public GameController() {
+		
 		this.mgui = new MainGame(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
 		this.aiPlayer = new EasyAI(GameBoard.State.O);
+		
 		
 	}
 	

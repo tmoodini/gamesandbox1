@@ -37,91 +37,57 @@ public class MainGame extends Game {
 	BitmapFont font;
 	private GameController controller;
 	private Camera camera;
+	private GameScreen gameScreen;
+	private MainMenuScreen mainMenu;
 	
 	public MainGame(GameController controller) {
 		
 		this.controller = controller;
 		
+		
+		
+		
 	}
 	
 	@Override
 	public void create () {
-		
-		this.setScreen(new MainMenuScreen(this));
-		
-		
-		/**
-		viewport = new FitViewport(800, 800);
-		//viewport.update(800,800);
-		stage = new Stage(viewport);
-		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
-		resetButton = new GameButton("RESET",skin);
-		currentTurn ="X";
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		
-		buttons = new GameButton[3][3];
-		resetButton.addListener(new ResetButtonListener(batch, img,controller));
-		this.winLabel = new Label("TEST", skin, "black");
-		
-		
-		winLabel.setY(stage.getViewport().getScreenHeight()-100);
-		
-		
-		
-		this.newGame();
-		
 	
-       
-        stage.act();
-        for(int i =0; i< 3;i++) {
-        	for(int j=0; j<3;j++)
-        	{
-        	stage.addActor(buttons[i][j]);
-        	}
-        }
-        stage.addActor(resetButton);
-        stage.addActor(winLabel);
-        
-        */
+		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
+		this.mainMenu = new MainMenuScreen(this);
+		this.gameScreen = new GameScreen(this);
+		
+		this.setScreen(mainMenu);
+				
+	}
+	
+	public void changeToGameScreen() {
+		if(this.gameScreen == null) {
+			this.gameScreen = new GameScreen(this);
+		}
+		this.setScreen(gameScreen);
+	}
+	
+	public void newGame() {
+		if(this.gameScreen == null) {
+			this.gameScreen.newGame();
+		}
 		
 	}
 
 	@Override
 	public void render () {
 		super.render();
-		/**
-		ScreenUtils.clear(1, 1, 1, 1);
 		
-	     
-        
-        Gdx.input.setInputProcessor(stage);
-        
-        
-       
-		
-		 stage.getViewport().update(stage.getViewport().getScreenWidth(), stage.getViewport().getScreenHeight());
-		    stage.draw();
-		    stage.act();
-		batch.begin();    
-		
-		batch.end();
-		**/
 	}
 	
 	@Override
 	public void resize(int width, int height) {
-		
-		//viewport.update(width, height);
-		
-	       //stage.getViewport().update(width, height, true);
-	        
+
 	}
 	
 	@Override
 	public void dispose () {
-		//batch.dispose();
-		//img.dispose();
+		
 	}
 	
 	
@@ -135,54 +101,23 @@ public class MainGame extends Game {
 	}
 	
 	public void setWinLabelText(String text) {
-		
-		//this.winLabel.setText(text);
-		//stage.draw();
-		
-		
+
+	}
+	
+	
+	
+
+	public GameController getController() {
+		return controller;
+	}
+
+	public void setController(GameController controller) {
+		this.controller = controller;
 	}
 	
 	public void flipButton(int row, int column, GameBoard.State state) {
 		
-		this.buttons[row][column].setText(state.toString()); 
-	}
-	
-	public void newGame() {
-		int x = -200;
-		int y = 100;
-		
-		
-		for(int i =0; i< 3;i++) {
-        	for(int j=0; j<3;j++)
-        	{
-        		if(buttons[i][j] != null) {
-        	buttons[i][j].remove();
-        		}
-        	}
-        }
-		buttons = null;
-		buttons = new GameButton[3][3];
-		for(int i =0; i<3; i++) {
-			
-			for(int j = 0; j < 3; j++) {
-			buttons[i][j] = new GameButton("",skin);
-			buttons[i][j].setSize(100, 100);
-			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
-		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
-		    buttons[i][j].addListener(new GameButtonListener(batch,img, controller));
-		    buttons[i][j].setRow(i);
-		    buttons[i][j].setColumn(j);
-		    stage.addActor(buttons[i][j]);
-		    x+=100;
-			}
-		    	
-		    		x = -200;
-		    		y-=100;
-		    	
-		    
-		    
-		}
-		
+		this.gameScreen.flipButton(row, column, state);
 	}
 	
 	

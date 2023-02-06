@@ -2,10 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -22,8 +27,8 @@ public class MainMenuScreen implements Screen {
 		this.game = game;
 		
 		
-		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		
+		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		this.helloLabel = new Label("TEST", skin, "black");
 	
 		stage = new Stage(new FitViewport(800, 480));
@@ -32,7 +37,17 @@ public class MainMenuScreen implements Screen {
 		
 		startButton = new GameButton("START",skin);
 		
+		startButton.addCaptureListener(new ChangeListener() {
+	        @Override
+	        public void changed (ChangeEvent event, Actor actor) {
+	        	game.changeToGameScreen();
+	            System.out.println("Button Pressed");
+	        }
+	    });
+		
 		stage.addActor(startButton);
+		stage.act();
+		//Gdx.input.setInputProcessor(stage);
 		
 	}
 
@@ -45,6 +60,8 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(1, 1, 1, 1);
+		Gdx.input.setInputProcessor(stage);
+		
 		stage.draw();
 		stage.act();
 		

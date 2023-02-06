@@ -20,22 +20,22 @@ public class GameScreen implements Screen {
 	private GameController controller;
 
 	
-	public GameScreen(final MainGame game, GameController controller) {
+	public GameScreen(MainGame game) {
 		
 		this.game = game;
 		
-		this.controller = controller;
+		this.controller = game.getController();
 		
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		
-		stage = new Stage(new FitViewport(800, 800));
+		stage = new Stage(new FitViewport(800, 480));
 		buttons = new GameButton[3][3];
 		
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		
 		this.newGame();
-		
+		Gdx.input.setInputProcessor(stage);
 		//stage.addActor(helloLabel);
 		
 	}
@@ -50,7 +50,12 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		
 		ScreenUtils.clear(1, 1, 1, 1);
+		
+		Gdx.input.setInputProcessor(stage);
+		
 		stage.draw();
+		stage.act();
+		stage.act();
 		
 	}
 
@@ -106,7 +111,7 @@ public class GameScreen implements Screen {
 			buttons[i][j].setSize(100, 100);
 			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
 		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
-		    buttons[i][j].addListener(new GameButtonListener(batch,img, controller));
+		    buttons[i][j].addListener(new GameButtonListener(batch,img, game));
 		    buttons[i][j].setRow(i);
 		    buttons[i][j].setColumn(j);
 		    stage.addActor(buttons[i][j]);
@@ -126,6 +131,10 @@ public class GameScreen implements Screen {
 		
 		
 		
+	}
+	public void flipButton(int row, int column, GameBoard.State state) {
+		
+		this.buttons[row][column].setText(state.toString()); 
 	}
 
 }
