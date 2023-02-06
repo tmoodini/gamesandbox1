@@ -47,7 +47,7 @@ public class MainMenuScreen implements Screen {
 		
 		stage.addActor(startButton);
 		stage.act();
-		//Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(stage);
 		
 	}
 
@@ -60,10 +60,11 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(1, 1, 1, 1);
-		Gdx.input.setInputProcessor(stage);
+		
 		
 		stage.draw();
 		stage.act();
+		Gdx.input.setInputProcessor(stage);
 		
 	}
 
