@@ -23,7 +23,7 @@ public class GameController {
 		this.mgui = new MainGame(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
-		this.aiPlayer = new EasyAI(GameBoard.State.O);
+		this.aiPlayer = new GFG(currentPlayer);
 		
 		
 		
@@ -31,7 +31,7 @@ public class GameController {
 	
 	
 	public MoveResult move(int x, int y){
-		
+		System.out.println("Moving = " + currentPlayer.toString());
 		GameBoard.State stateOfSquare = board.currentState(x, y);
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O) {
 			return MoveResult.OCCUPIED;
@@ -66,15 +66,16 @@ public class GameController {
 	
 	public void aiMove() {
 		GameBoard.State aiPlay = currentPlayer;
-		
+		System.out.println("AI " + currentPlayer.toString());
 		int[] aiMove = aiPlayer.findBestMove(this.board.getBoard());
 		System.out.println(aiMove[0]);
 		if(aiMove[0] >= 0) {
 			MoveResult mr = this.move(aiMove[0],aiMove[1]);
 			if(mr == mr.ACCEPTED || mr == mr.WIN) {
-				System.out.println("STILL GOING");
-			    mgui.flipButton(aiMove[0], aiMove[1], currentPlayer);
-			    this.flipCurrentPlayer();
+				
+			    mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
+			    System.out.println("AI " + aiPlay.toString() + " Wants row: " + aiMove[0] + " Col: " + aiMove[1]);
+			    //this.flipCurrentPlayer();
 			}
 		}
 		

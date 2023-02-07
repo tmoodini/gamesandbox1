@@ -37,7 +37,7 @@ public class MainGame extends Game {
 	BitmapFont font;
 	private GameController controller;
 	private Camera camera;
-	private static GameScreen gameScreen;
+	private GameScreen gameScreen;
 	private MainMenuScreen mainMenu;
 	
 	public MainGame(GameController controller) {

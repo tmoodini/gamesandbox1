@@ -46,11 +46,11 @@ public class GameButtonListener extends InputListener{
         	GameBoard.State nextPlayer = controller.getCurrentPlayer();
         	System.out.println("NEXT PLAYER " + controller.getCurrentPlayer().toString());
         	
-            batch.begin();
-            batch.draw(img,0,0);
-            batch.end();
+            //batch.begin();
+           // batch.draw(img,0,0);
+           // batch.end();
            
-        	gameScreen.aiMove();
+        	controller.aiMove();
             
             //this.gameScreen.getStage().act();
             b1.setSelected(true);
