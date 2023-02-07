@@ -24,7 +24,7 @@ public class MainMenuScreen implements Screen{
 	private Label helloLabel;
 	
 	
-	public MainMenuScreen(MainGame game) {
+	public MainMenuScreen(final MainGame game) {
 		this.game = game;
 		
 		

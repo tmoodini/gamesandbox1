@@ -13,7 +13,7 @@ public class GameButtonListener extends InputListener{
 	SpriteBatch batch;
 	Texture img;
 	GameButton button;
-	MainGame sb2;
+	GameScreen gameScreen;
 	
 	GameController controller;
 	
@@ -21,7 +21,7 @@ public class GameButtonListener extends InputListener{
 		this.controller = game.getController();
 		this.batch = batch;
 		this.img = img;
-		
+		this.gameScreen = game.getGameScreen();
 		
 		
 	}
@@ -50,10 +50,16 @@ public class GameButtonListener extends InputListener{
             batch.draw(img,0,0);
             batch.end();
            
-            controller.aiMove();
+        	gameScreen.aiMove();
+            
+            //this.gameScreen.getStage().act();
             b1.setSelected(true);
            
             b1.setDisabled(true);
+            
+           // batch.begin();
+           // batch.draw(img,0,0);
+            //batch.end();
         }
         
         
@@ -64,6 +70,8 @@ public class GameButtonListener extends InputListener{
        //Gdx.app.log("my app", "Released");
        TextButton b1 = (TextButton) event.getListenerActor();
        //b1.setText(sb2.getCurrentTurn());
+       
+       
 	 }
 	 
 	

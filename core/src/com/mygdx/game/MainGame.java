@@ -37,7 +37,7 @@ public class MainGame extends Game {
 	BitmapFont font;
 	private GameController controller;
 	private Camera camera;
-	private GameScreen gameScreen;
+	private static GameScreen gameScreen;
 	private MainMenuScreen mainMenu;
 	
 	public MainGame(GameController controller) {
@@ -61,16 +61,16 @@ public class MainGame extends Game {
 	}
 	
 	public void changeToGameScreen() {
-		if(this.gameScreen == null) {
+		//if(this.gameScreen == null) {
 			this.gameScreen = new GameScreen(this);
-		}
+		//}
 		this.setScreen(gameScreen);
 	}
 	
 	public void newGame() {
-		if(this.gameScreen == null) {
+		//if(this.gameScreen == null) {
 			this.gameScreen.newGame();
-		}
+		//}
 		
 	}
 
@@ -117,17 +117,9 @@ public class MainGame extends Game {
 	
 	public void flipButton(int row, int column, GameBoard.State state) {
 		
-		if(this.gameScreen == null) {
-			System.out.println("NULL GAME!");
-		}
 		
-		try {
 		this.gameScreen.flipButton(row, column, state);
 		
-		}catch (Exception e) {
-			System.out.println("ERROR" + state.toString());
-			e.printStackTrace();
-		}
 	}
 
 	public GameScreen getGameScreen() {

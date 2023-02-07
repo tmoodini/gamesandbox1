@@ -20,6 +20,7 @@ public class GameScreen implements Screen {
 	private GameController controller;
 
 	
+
 	public GameScreen(final MainGame game) {
 		
 		this.game = game;
@@ -54,7 +55,7 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		stage.draw();
-		stage.act();
+	
 		stage.act();
 		
 	}
@@ -137,6 +138,18 @@ public class GameScreen implements Screen {
 		this.buttons[row][column].setText(state.toString()); 
 	}
 	
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 	
+	public void aiMove() {
+		
+		game.getController().aiMove();
+	}
+
 
 }

@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.setTitle("Sandbox2");
 		config.setWindowedMode(800, 800);
 		GameController controller = new GameController();
-		new Lwjgl3Application(new MainGame(controller), config);
+		new Lwjgl3Application(controller.getMgui(), config);
 	}
 }

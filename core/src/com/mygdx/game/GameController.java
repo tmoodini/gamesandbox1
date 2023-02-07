@@ -74,6 +74,7 @@ public class GameController {
 			if(mr == mr.ACCEPTED || mr == mr.WIN) {
 				System.out.println("STILL GOING");
 			    mgui.flipButton(aiMove[0], aiMove[1], currentPlayer);
+			    this.flipCurrentPlayer();
 			}
 		}
 		
