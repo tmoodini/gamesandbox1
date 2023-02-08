@@ -50,7 +50,7 @@ public class GameController {
 			return MoveResult.WIN;
 		}
 		
-		
+		System.out.println("DRAW");
 		return MoveResult.DRAW;
 	}
 	
@@ -75,9 +75,13 @@ public class GameController {
 				
 			    mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
 			    System.out.println("AI " + aiPlay.toString() + " Wants row: " + aiMove[0] + " Col: " + aiMove[1]);
-			    //this.flipCurrentPlayer();
+			   
 			}
+			
 		}
+		
+		
+		
 		
 	}
 	
@@ -113,6 +117,10 @@ public class GameController {
 
 	public void setCurrentPlayer(GameBoard.State currentPlayer) {
 		this.currentPlayer = currentPlayer;
+	}
+	
+	public void gameOver() {
+		mgui.getGameScreen().gameOver();
 	}
 
 }

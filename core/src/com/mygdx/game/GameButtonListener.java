@@ -39,12 +39,17 @@ public class GameButtonListener extends InputListener{
         	if(moveResult != GameController.MoveResult.OCCUPIED ) {
         		
         			b1.setText(currentPlayer.toString());		
-        		
+        			
         		
         	}
         	
-        	GameBoard.State nextPlayer = controller.getCurrentPlayer();
-        	System.out.println("NEXT PLAYER " + controller.getCurrentPlayer().toString());
+        	if(moveResult == GameController.MoveResult.DRAW || moveResult == GameController.MoveResult.WIN) {
+        		controller.gameOver();
+        	}
+        	
+        	//GameBoard.State nextPlayer = controller.getCurrentPlayer();
+        	
+        	
         	
             //batch.begin();
            // batch.draw(img,0,0);

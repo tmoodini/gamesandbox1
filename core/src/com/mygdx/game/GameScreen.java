@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -149,6 +150,16 @@ public class GameScreen implements Screen {
 	public void aiMove() {
 		
 		game.getController().aiMove();
+	}
+	
+	public void gameOver() {
+		System.out.println("GAME OVER CALLED");
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j <3; j++) {
+				buttons[i][j].remove();
+			}
+		}
+		
 	}
 
 
