@@ -23,7 +23,7 @@ public class GameController {
 		this.mgui = new MainGame(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
-		this.aiPlayer = new GFG(currentPlayer);
+		this.aiPlayer = new GFG(GameBoard.State.O);
 		
 		
 		

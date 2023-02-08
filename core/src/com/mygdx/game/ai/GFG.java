@@ -9,7 +9,7 @@ public class GFG implements TicTacAI{
 	};
 	
 
-	
+	//This algorithm is meant to pick the best move for the player which is AI
 	private static GameBoard.State player = GameBoard.State.X;
 	private static GameBoard.State	opponent = GameBoard.State.O;
 	
