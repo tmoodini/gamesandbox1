@@ -44,7 +44,7 @@ public class GameButtonListener extends InputListener{
         	}
         	
         	if(moveResult == GameController.MoveResult.DRAW || moveResult == GameController.MoveResult.WIN) {
-        		controller.gameOver();
+        		//controller.gameOver();
         	}
         	
         	//GameBoard.State nextPlayer = controller.getCurrentPlayer();

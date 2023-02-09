@@ -152,7 +152,7 @@ public class GameScreen implements Screen {
 		game.getController().aiMove();
 	}
 	
-	public void gameOver() {
+	public void gameOver(GameController.MoveResult finish) {
 		System.out.println("GAME OVER CALLED");
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j <3; j++) {

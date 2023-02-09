@@ -11,7 +11,7 @@ public class GameController {
 	private MainGame mgui;
 	private GameBoard board;
 	private GameBoard.State currentPlayer;
-	enum MoveResult{WIN,DRAW,ACCEPTED,OCCUPIED};
+	public enum MoveResult{WIN,DRAW,ACCEPTED,OCCUPIED};
 	//private GFG aiPlayer; 
 	private EasyAI easyAI;
 	private TicTacAI aiPlayer;
@@ -47,10 +47,12 @@ public class GameController {
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O)
 		{
 			mgui.setWinLabelText("WINNER!");
+			mgui.getGameScreen().gameOver(MoveResult.WIN);
 			return MoveResult.WIN;
 		}
 		
 		System.out.println("DRAW");
+		mgui.getGameScreen().gameOver(MoveResult.DRAW);
 		return MoveResult.DRAW;
 	}
 	
@@ -119,8 +121,8 @@ public class GameController {
 		this.currentPlayer = currentPlayer;
 	}
 	
-	public void gameOver() {
-		mgui.getGameScreen().gameOver();
-	}
+	//public void gameOver() {
+	//	mgui.getGameScreen().gameOver();
+	//}
 
 }
