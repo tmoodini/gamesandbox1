@@ -47,12 +47,12 @@ public class GameController {
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O)
 		{
 			mgui.setWinLabelText("WINNER!");
-			mgui.getGameScreen().gameOver(MoveResult.WIN);
+			mgui.getGameScreen().gameOver(MoveResult.WIN,stateOfSquare);
 			return MoveResult.WIN;
 		}
 		
 		System.out.println("DRAW");
-		mgui.getGameScreen().gameOver(MoveResult.DRAW);
+		mgui.getGameScreen().gameOver(MoveResult.DRAW, GameBoard.State.Blank);
 		return MoveResult.DRAW;
 	}
 	

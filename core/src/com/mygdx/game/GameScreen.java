@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.mygdx.game.GameController.MoveResult;
 
 public class GameScreen implements Screen {
 	
@@ -19,6 +22,7 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;
 	private Texture img;
 	private GameController controller;
+	private Texture winLoseDrawImage;
 
 	
 
@@ -152,13 +156,39 @@ public class GameScreen implements Screen {
 		game.getController().aiMove();
 	}
 	
-	public void gameOver(GameController.MoveResult finish) {
+	public void gameOver(GameController.MoveResult finish, GameBoard.State state) {
 		System.out.println("GAME OVER CALLED");
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j <3; j++) {
 				buttons[i][j].remove();
 			}
 		}
+		
+		if(finish == MoveResult.DRAW) {
+		winLoseDrawImage = new Texture(Gdx.files.internal("DRAW.png"));
+        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275);          
+        Image actor = new Image(region);
+        stage.addActor(actor);
+		}
+		
+		if(finish == MoveResult.WIN) {
+			if(state == GameBoard.State.X) {
+				winLoseDrawImage = new Texture(Gdx.files.internal("XWINS.png"));
+		        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275); 
+		       
+		        Image actor = new Image(region);
+		        stage.addActor(actor);
+			}
+			if(state == GameBoard.State.O) {
+				winLoseDrawImage = new Texture(Gdx.files.internal("OWINS.png"));
+		        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275);  
+		        region.setRegionWidth(winLoseDrawImage.getWidth());
+		        Image actor = new Image(region);
+		        stage.addActor(actor);
+			}
+		}
+		
+		
 		
 	}
 
