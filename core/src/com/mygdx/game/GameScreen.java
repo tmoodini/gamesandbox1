@@ -5,10 +5,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.GameController.MoveResult;
@@ -23,7 +27,11 @@ public class GameScreen implements Screen {
 	private Texture img;
 	private GameController controller;
 	private Texture winLoseDrawImage;
-
+	private TextButton newGameButton;
+	private TextButton mainMenuButton;
+	private TextureRegion winLoseDrawRegion;
+	private Image winLoseDrawActor;
+	private Table buttonTable;
 	
 
 	public GameScreen(final MainGame game) {
@@ -37,12 +45,42 @@ public class GameScreen implements Screen {
 		stage = new Stage(new FitViewport(800, 800));
 		buttons = new GameButton[3][3];
 		
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		newGameButton = new TextButton("NEW GAME", skin);
+		mainMenuButton = new TextButton("Main Menu", skin);		
+		
+		buttonTable = new Table();
+		
+		newGameButton.addListener(new InputListener() {
+	        
+	        @Override 
+	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	            //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+	           TextButton b1 = (TextButton) event.getListenerActor();
+	           game.getController().newGame();
+	            return true;
+	        }
+	    });
+		
+		mainMenuButton.addListener(new InputListener() {
+	        
+	        @Override 
+	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	            //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+	           TextButton b1 = (TextButton) event.getListenerActor();
+	           game.changeToMainMenuScreen();
+	            return true;
+	        }
+	    });
+		
+		buttonTable.add(newGameButton);
+		buttonTable.add(mainMenuButton);
+		buttonTable.setX(stage.getViewport().getScreenWidth()/2);
+		buttonTable.setY(100);
+		stage.addActor(buttonTable);
 		
 		this.newGame();
 		Gdx.input.setInputProcessor(stage);
-		//stage.addActor(helloLabel);
+		
 		
 	}
 
@@ -91,7 +129,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		stage.dispose();
 		
 	}
 	
@@ -99,6 +137,11 @@ public class GameScreen implements Screen {
 		int x = -200;
 		int y = 100;
 		
+		
+		
+		if(winLoseDrawActor != null) {
+			winLoseDrawActor.remove();
+		}
 		
 		for(int i =0; i< 3;i++) {
         	for(int j=0; j<3;j++)
@@ -134,8 +177,7 @@ public class GameScreen implements Screen {
         	stage.addActor(buttons[i][j]);
         	}
         }
-		
-		
+	
 		
 	}
 	public void flipButton(int row, int column, GameBoard.State state) {
@@ -157,7 +199,7 @@ public class GameScreen implements Screen {
 	}
 	
 	public void gameOver(GameController.MoveResult finish, GameBoard.State state) {
-		System.out.println("GAME OVER CALLED");
+		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j <3; j++) {
 				buttons[i][j].remove();
@@ -166,29 +208,33 @@ public class GameScreen implements Screen {
 		
 		if(finish == MoveResult.DRAW) {
 		winLoseDrawImage = new Texture(Gdx.files.internal("DRAW.png"));
-        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275);          
-        Image actor = new Image(region);
-        stage.addActor(actor);
+        this.winLoseDrawRegion = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275); 
+        winLoseDrawActor = new Image(winLoseDrawRegion);
+        winLoseDrawActor.setY(500);
+        stage.addActor(winLoseDrawActor);
+        stage.act();
 		}
 		
 		if(finish == MoveResult.WIN) {
 			if(state == GameBoard.State.X) {
 				winLoseDrawImage = new Texture(Gdx.files.internal("XWINS.png"));
-		        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275); 
-		       
-		        Image actor = new Image(region);
-		        stage.addActor(actor);
+				winLoseDrawRegion = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275); 
+				
+				winLoseDrawActor = new Image(winLoseDrawRegion);
+				winLoseDrawRegion.setRegionWidth(winLoseDrawImage.getWidth());
+				winLoseDrawActor.setY(500);
+		        stage.addActor(winLoseDrawActor);
 			}
 			if(state == GameBoard.State.O) {
 				winLoseDrawImage = new Texture(Gdx.files.internal("OWINS.png"));
-		        TextureRegion region = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275);  
-		        region.setRegionWidth(winLoseDrawImage.getWidth());
-		        Image actor = new Image(region);
-		        stage.addActor(actor);
+				winLoseDrawRegion = new TextureRegion(winLoseDrawImage, 0, 0, 512, 275);  
+				winLoseDrawRegion.setRegionWidth(winLoseDrawImage.getWidth());
+				
+				winLoseDrawActor = new Image(winLoseDrawRegion);
+				winLoseDrawActor.setY(500);
+		        stage.addActor(winLoseDrawActor);
 			}
 		}
-		
-		
 		
 	}
 

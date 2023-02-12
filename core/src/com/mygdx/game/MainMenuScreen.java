@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -21,38 +22,66 @@ public class MainMenuScreen implements Screen{
 	private TextButton startButton;
 	private Skin skin;
 	private Stage stage;
-	private Label helloLabel;
+	
+	private Table table;
+	private TextButton easyGameButton;
+	private TextButton hardGameButton;
 	
 	
 	public MainMenuScreen(final MainGame game) {
 		this.game = game;
-		
-		
-		
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
-		this.helloLabel = new Label("TEST", skin, "black");
-	
+		
 		stage = new Stage(new FitViewport(800, 800));
-		
-		
-		
 		startButton = new GameButton("START",skin);
+		easyGameButton = new TextButton("Easy Game",skin);
+		hardGameButton = new TextButton("Hard Game",skin);
 		
 		startButton.addListener(new InputListener() {
 	        
 	        @Override 
 	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-	            //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
-	           TextButton b1 = (TextButton) event.getListenerActor();
-	        	game.changeToGameScreen();
-	            System.out.println("Button Pressed");
+	           
+	          // TextButton b1 = (TextButton) event.getListenerActor();
+	           game.changeToGameScreen();
+	            
 	            return true;
 	        }
 	    });
 		
-		stage.addActor(startButton);
+		easyGameButton.addListener(new InputListener() {
+	        
+	        @Override 
+	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	           
+	          game.getController().setAI("EASY");
+	           game.changeToGameScreen();
+	            
+	            return true;
+	        }
+	    });
+		
+		hardGameButton.addListener(new InputListener() {
+	        
+	        @Override 
+	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+	           
+	          game.getController().setAI("HARD");
+	           game.changeToGameScreen();
+	            
+	            return true;
+	        }
+	    });
+		table = new Table();
+		table.setX(stage.getViewport().getScreenWidth()/2);
+		table.setY(stage.getViewport().getScreenWidth()/2);
+		table.add(startButton);
+		table.row();
+		table.add(easyGameButton);
+		table.row();
+		table.add(hardGameButton);
+		stage.addActor(table);
 		stage.act();
-		//tried again
 		Gdx.input.setInputProcessor(stage);
 		
 	}
@@ -100,7 +129,7 @@ public class MainMenuScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		stage.dispose();
 		
 	}
 

@@ -29,9 +29,19 @@ public class GameController {
 		
 	}
 	
+	public void setAI(String difficulty) {
+		if(difficulty.equals("EASY")) {
+			this.aiPlayer = new EasyAI(GameBoard.State.O);
+		}
+		else {
+			this.aiPlayer = new GFG(GameBoard.State.O);
+		}
+		
+	}
+	
 	
 	public MoveResult move(int x, int y){
-		System.out.println("Moving = " + currentPlayer.toString());
+	
 		GameBoard.State stateOfSquare = board.currentState(x, y);
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O) {
 			return MoveResult.OCCUPIED;
@@ -46,12 +56,12 @@ public class GameController {
 		
 		if(stateOfSquare == GameBoard.State.X || stateOfSquare == GameBoard.State.O)
 		{
-			mgui.setWinLabelText("WINNER!");
+			
 			mgui.getGameScreen().gameOver(MoveResult.WIN,stateOfSquare);
 			return MoveResult.WIN;
 		}
 		
-		System.out.println("DRAW");
+		
 		mgui.getGameScreen().gameOver(MoveResult.DRAW, GameBoard.State.Blank);
 		return MoveResult.DRAW;
 	}
@@ -68,15 +78,15 @@ public class GameController {
 	
 	public void aiMove() {
 		GameBoard.State aiPlay = currentPlayer;
-		System.out.println("AI " + currentPlayer.toString());
+		
 		int[] aiMove = aiPlayer.findBestMove(this.board.getBoard());
-		System.out.println(aiMove[0]);
+		//System.out.println(aiMove[0]);
 		if(aiMove[0] >= 0) {
 			MoveResult mr = this.move(aiMove[0],aiMove[1]);
 			if(mr == mr.ACCEPTED || mr == mr.WIN) {
 				
 			    mgui.flipButton(aiMove[0], aiMove[1], aiPlay);
-			    System.out.println("AI " + aiPlay.toString() + " Wants row: " + aiMove[0] + " Col: " + aiMove[1]);
+			    
 			   
 			}
 			
@@ -90,6 +100,7 @@ public class GameController {
 	public void newGame() {
 		
 		this.board = new GameBoard();
+		this.currentPlayer = GameBoard.State.X;
 		this.mgui.newGame();
 		
 	}
@@ -121,8 +132,5 @@ public class GameController {
 		this.currentPlayer = currentPlayer;
 	}
 	
-	//public void gameOver() {
-	//	mgui.getGameScreen().gameOver();
-	//}
 
 }

@@ -28,43 +28,25 @@ public class GameButtonListener extends InputListener{
 	
 	@Override 
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-        //Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+       
         GameButton b1 = (GameButton) event.getListenerActor();
         
         if(!b1.getSelected()) {
         	GameBoard.State currentPlayer = controller.getCurrentPlayer();
-        
         	GameController.MoveResult moveResult = controller.move(b1.getRow(), b1.getColumn());
-        	//System.out.println(moveResult.toString());
-        	if(moveResult != GameController.MoveResult.OCCUPIED ) {
-        		
+        	
+        	if(moveResult != GameController.MoveResult.OCCUPIED ) {	
         			b1.setText(currentPlayer.toString());		
-        			
-        		
         	}
         	
         	if(moveResult == GameController.MoveResult.DRAW || moveResult == GameController.MoveResult.WIN) {
         		//controller.gameOver();
         	}
-        	
-        	//GameBoard.State nextPlayer = controller.getCurrentPlayer();
-        	
-        	
-        	
-            //batch.begin();
-           // batch.draw(img,0,0);
-           // batch.end();
-           
-        	controller.aiMove();
-            
-            //this.gameScreen.getStage().act();
+
+        	controller.aiMove();     
             b1.setSelected(true);
-           
             b1.setDisabled(true);
-            
-           // batch.begin();
-           // batch.draw(img,0,0);
-            //batch.end();
+ 
         }
         
         
@@ -72,16 +54,9 @@ public class GameButtonListener extends InputListener{
 }
 	
 	 public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-       //Gdx.app.log("my app", "Released");
+       
        TextButton b1 = (TextButton) event.getListenerActor();
-       //b1.setText(sb2.getCurrentTurn());
-       
-       
+   
 	 }
-	 
-	
-       
-       
-       
 
 }

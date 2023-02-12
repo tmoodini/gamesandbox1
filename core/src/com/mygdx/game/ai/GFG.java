@@ -210,8 +210,8 @@ public class GFG implements TicTacAI{
 	        }
 	    }
 	 
-	    System.out.printf("The value of the best Move " +
-	                             "is : %d\n\n", bestVal);
+	   // System.out.printf("The value of the best Move " +
+	      //                       "is : %d\n\n", bestVal);
 	 
 	    return bestMove;
 	} 
