@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
 	private TextureRegion winLoseDrawRegion;
 	private Image winLoseDrawActor;
 	private Table buttonTable;
+	private Table gameButtonTable;
 	
 
 	public GameScreen(final MainGame game) {
@@ -46,8 +47,9 @@ public class GameScreen implements Screen {
 		buttons = new GameButton[3][3];
 		
 		newGameButton = new TextButton("NEW GAME", skin);
-		mainMenuButton = new TextButton("Main Menu", skin);		
-		
+		mainMenuButton = new TextButton("Main Menu", skin);	
+		gameButtonTable = new Table();
+		//gameButtonTable.setSize(300, 300);
 		buttonTable = new Table();
 		
 		newGameButton.addListener(new InputListener() {
@@ -158,25 +160,30 @@ public class GameScreen implements Screen {
 			for(int j = 0; j < 3; j++) {
 			buttons[i][j] = new GameButton("",skin);
 			buttons[i][j].setSize(100, 100);
-			buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
-		    buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
+			//buttons[i][j].setX(stage.getViewport().getScreenWidth()/2+x);
+		   // buttons[i][j].setY(stage.getViewport().getScreenHeight()/2+y);
 		    buttons[i][j].addListener(new GameButtonListener(batch,img, game));
 		    buttons[i][j].setRow(i);
 		    buttons[i][j].setColumn(j);
-		    stage.addActor(buttons[i][j]);
+		    
+		    //stage.addActor(buttons[i][j]);
+		    gameButtonTable.add(buttons[i][j]);
 		    x+=100;
 			}
-		    	
+		    	gameButtonTable.row();
 		    		x = -200;
 		    		y-=100;
 		    	}
-		
+		/**
 		for(int i =0; i< 3;i++) {
         	for(int j=0; j<3;j++)
         	{
         	stage.addActor(buttons[i][j]);
         	}
-        }
+        }**/
+		gameButtonTable.setX(stage.getViewport().getScreenWidth()/2);
+		gameButtonTable.setY(stage.getViewport().getScreenHeight()/2);
+		stage.addActor(gameButtonTable);
 	
 		
 	}

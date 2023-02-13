@@ -55,6 +55,7 @@ public class MainMenuScreen implements Screen{
 	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 	           
 	          game.getController().setAI("EASY");
+	          game.getController().newGame();
 	           game.changeToGameScreen();
 	            
 	            return true;
@@ -67,6 +68,7 @@ public class MainMenuScreen implements Screen{
 	    	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 	           
 	          game.getController().setAI("HARD");
+	          game.getController().newGame();
 	           game.changeToGameScreen();
 	            
 	            return true;
