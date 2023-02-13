@@ -78,6 +78,7 @@ public class GameScreen implements Screen {
 		buttonTable.add(mainMenuButton);
 		buttonTable.setX(stage.getViewport().getScreenWidth()/2);
 		buttonTable.setY(100);
+		
 		stage.addActor(buttonTable);
 		
 		this.newGame();
@@ -167,7 +168,7 @@ public class GameScreen implements Screen {
 		    buttons[i][j].setColumn(j);
 		    
 		    //stage.addActor(buttons[i][j]);
-		    gameButtonTable.add(buttons[i][j]);
+		    gameButtonTable.add(buttons[i][j]).width(150);
 		    x+=100;
 			}
 		    	gameButtonTable.row();
@@ -183,6 +184,7 @@ public class GameScreen implements Screen {
         }**/
 		gameButtonTable.setX(stage.getViewport().getScreenWidth()/2);
 		gameButtonTable.setY(stage.getViewport().getScreenHeight()/2);
+		//gameButtonTable.setWidth(stage.getViewport().getScreenWidth()*.75f);
 		stage.addActor(gameButtonTable);
 	
 		

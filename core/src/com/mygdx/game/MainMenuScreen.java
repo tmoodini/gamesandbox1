@@ -33,10 +33,11 @@ public class MainMenuScreen implements Screen{
 		skin = new Skin(Gdx.files.internal("glassy/glassy-ui.json"));
 		
 		stage = new Stage(new FitViewport(800, 800));
-		startButton = new GameButton("START",skin);
+		//startButton = new GameButton("START",skin);
 		easyGameButton = new TextButton("Easy Game",skin);
 		hardGameButton = new TextButton("Hard Game",skin);
 		
+		/**
 		startButton.addListener(new InputListener() {
 	        
 	        @Override 
@@ -47,7 +48,7 @@ public class MainMenuScreen implements Screen{
 	            
 	            return true;
 	        }
-	    });
+	    });**/
 		
 		easyGameButton.addListener(new InputListener() {
 	        
@@ -77,8 +78,8 @@ public class MainMenuScreen implements Screen{
 		table = new Table();
 		table.setX(stage.getViewport().getScreenWidth()/2);
 		table.setY(stage.getViewport().getScreenWidth()/2);
-		table.add(startButton);
-		table.row();
+		//table.add(startButton);
+		//table.row();
 		table.add(easyGameButton);
 		table.row();
 		table.add(hardGameButton);
