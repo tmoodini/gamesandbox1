@@ -192,6 +192,8 @@ public class GameScreen implements Screen {
 	public void flipButton(int row, int column, GameBoard.State state) {
 		
 		this.buttons[row][column].setText(state.toString()); 
+		this.buttons[row][column].setDisabled(true);
+		this.buttons[row][column].setSelected(true);
 	}
 	
 	public Stage getStage() {
@@ -211,7 +213,7 @@ public class GameScreen implements Screen {
 		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j <3; j++) {
-				buttons[i][j].remove();
+				buttons[i][j].setSelected(true);
 			}
 		}
 		

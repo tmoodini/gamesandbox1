@@ -2,7 +2,7 @@ package com.mygdx.game.ai;
 
 import com.mygdx.game.GameBoard;
 
-public class GFG implements TicTacAI{
+public class HardAI implements TicTacAI{
 	static class Move
 	{
 	    int row, col;
@@ -14,7 +14,7 @@ public class GFG implements TicTacAI{
 	private static GameBoard.State	opponent = GameBoard.State.O;
 	
 	
-	public GFG(GameBoard.State player) {
+	public HardAI(GameBoard.State player) {
 		if(player != GameBoard.State.X) {
 			this.player = player;
 			this.opponent = GameBoard.State.X;
@@ -210,21 +210,9 @@ public class GFG implements TicTacAI{
 	        }
 	    }
 	 
-	   // System.out.printf("The value of the best Move " +
-	      //                       "is : %d\n\n", bestVal);
 	 
 	    return bestMove;
 	} 
-	public static void main(String[] args) {
-		GameBoard.State board[][] = {{ GameBoard.State.X, GameBoard.State.O, GameBoard.State.X },
-                 { GameBoard.State.O, GameBoard.State.O, GameBoard.State.X },
-                 { GameBoard.State.Blank, GameBoard.State.Blank, GameBoard.State.Blank }};
-			GFG gfg= new GFG(GameBoard.State.X);
-		 	int[] bestMove = gfg.findBestMove(board);
 
-		 	System.out.printf("The Optimal Move is :\n");
-		 	System.out.printf("ROW: %d COL: %d\n\n",
-          bestMove[0], bestMove[1] );
-	}
 
 }

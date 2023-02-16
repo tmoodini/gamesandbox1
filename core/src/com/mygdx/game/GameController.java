@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameBoard.State;
 import com.mygdx.game.ai.EasyAI;
-import com.mygdx.game.ai.GFG;
+import com.mygdx.game.ai.HardAI;
 import com.mygdx.game.ai.TicTacAI;
 
 public class GameController {
@@ -23,7 +23,7 @@ public class GameController {
 		this.mgui = new MainGame(this);
 		this.board = new GameBoard();
 		this.currentPlayer = GameBoard.State.X;
-		this.aiPlayer = new GFG(GameBoard.State.O);
+		this.aiPlayer = new HardAI(GameBoard.State.O);
 		
 		
 		
@@ -34,7 +34,7 @@ public class GameController {
 			this.aiPlayer = new EasyAI(GameBoard.State.O);
 		}
 		else {
-			this.aiPlayer = new GFG(GameBoard.State.O);
+			this.aiPlayer = new HardAI(GameBoard.State.O);
 		}
 		
 	}
